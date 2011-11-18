@@ -1,0 +1,172 @@
+#!/system/bin/sh
+#data2extV4 based on ownhere, modified by Joey Jiao to suit for C8500,C8600...
+BUSYBOX="/system/xbin/busybox"
+
+echo "try link huawei additional partition"
+if [ -b /dev/block/mtdblock8 ];
+then
+	mkdir /data/cust;
+	chown 1000.1000 /data/cust;
+	chmod 777 /data/cust;
+	mount /dev/block/mtdblock8 /data/cust;
+fi
+if [ -b /dev/block/mtdblock7 ];
+then
+	mkdir /data/userdata2;
+	chown 1000.1000 /data/userdata2;
+	chmod 777 /data/userdata2;
+	mount /dev/block/mtdblock7 /data/userdata2;
+fi
+
+echo "try data2ext"
+
+SD_EXT_PART=""
+SD_EXT2_PART=""
+SD_EXT3_PART=""
+for MMC_NUM in `seq 0 9`;
+do
+    MMC_TYPE=`cat /sys/block/mmcblk$MMC_NUM/device/type`;
+    if [ "$MMC_TYPE" = "SD" ];
+    then
+        SD_EXT_PART=/dev/block/mmcblk${MMC_NUM}p2;
+	SD_EXT2_PART=/dev/block/mmcblk${MMC_NUM}p3;
+	SD_EXT3_PART=/dev/block/mmcblk${MMC_NUM}p4;
+        break
+    fi
+done
+
+#data2extV9.3 by ownhere 
+
+# sdcard speed fix
+
+if [ -e /sys/devices/virtual/bdi/179:0/read_ahead_kb ];
+then
+    /system/xbin/echo "4096" > /sys/devices/virtual/bdi/179:0/read_ahead_kb;
+fi;
+
+#real IO improve from v9.0 !!!!!
+
+echo "cfq" > /sys/block/mmcblk0/queue/scheduler;
+echo 1 > /sys/block/mmcblk0/queue/rotational;
+for i in 1 2 3 4 5;
+do
+	echo "deadline" > /sys/block/mtdblock$i/queue/scheduler;
+	echo 0 > /sys/block/mtdblock$i/queue/rotational;
+done
+
+SD_EXT_DIR="/sd-ext"
+SD_EXT2_DIR="/mnt/asec/extdata"
+if [ -b "$SD_EXT_PART" ];
+then
+	if [ ! -e /data/system/system.firstrun.finish ];
+	then
+		/system/xbin/mkfs.ext4 -T ext4 -b 4096 -m 0 -F -L userdata "$SD_EXT_PART";
+		/system/bin/tune2fs -o journal_data_ordered "$SD_EXT_PART";
+		/system/bin/tune2fs -E hash_alg=tea "$SD_EXT_PART";
+		/system/bin/tune2fs -e continue "$SD_EXT_PART";
+		/system/bin/tune2fs -O ^has_journal "$SD_EXT_PART";
+		/system/bin/tune2fs -O ^huge_file "$SD_EXT_PART";
+		/system/bin/e2fsck -y -v -f "$SD_EXT_PART";
+	fi
+
+	/system/bin/tune2fs -l "$SD_EXT_PART";
+	$BUSYBOX mount -t ext4 -o noauto_da_alloc,data=ordered,commit=15,barrier=1,nouser_xattr,errors=continue,noatime,nodiratime,nosuid,nodev "$SD_EXT_PART" "$SD_EXT_DIR";
+	$BUSYBOX chown 1000.1000 "$SD_EXT_DIR";
+	$BUSYBOX chmod 771 "$SD_EXT_DIR";
+
+	if [ ! -e /data/system/system.firstrun.finish ]; 
+	then
+		$BUSYBOX rm -rf "$SD_EXT_DIR"/*;
+		$BUSYBOX mkdir /data/system;
+		$BUSYBOX chown 1000.1000 /data/system;
+		$BUSYBOX chmod 775 /data/system;
+		$BUSYBOX touch /data/system/system.firstrun.finish;
+	fi
+
+	for i in app app-private;
+	do
+		mkdir "$SD_EXT_DIR"/$i;
+		if [ ! -h /data/$i ];
+		then
+			if [ -h "$SD_EXT_DIR"/$i ];
+			then
+				rm "$SD_EXT_DIR"/$i;
+			fi
+			cp /data/$i/* "$SD_EXT_DIR"/$i;
+			rm -rf /data/$i;
+			ln -s "$SD_EXT_DIR"/$i /data/$i;
+			chown 1000.1000 "$SD_EXT_DIR"/$i;
+			chmod 771 "$SD_EXT_DIR"/$i;
+			chown 1000.1000 /data/$i;
+			chmod 771 /data/$i;
+		fi;
+	done;
+
+	$BUSYBOX mkdir -p "$SD_EXT2_DIR"
+	if [ ! -e /data/system/data2sd.ext.finish ]; 
+	then
+		if [ -b "$SD_EXT2_PART" ];
+		then
+			echo "+++Found mmcblk0p3, will use it for /data/data, create ext4 fs on it now..."
+			/system/xbin/mkfs.ext4 -T ext4 -b 4096 -m 0 -F -L extdata "$SD_EXT2_PART";
+			/system/bin/tune2fs -o journal_data_ordered "$SD_EXT2_PART";
+			/system/bin/tune2fs -E hash_alg=tea "$SD_EXT2_PART";
+			/system/bin/tune2fs -e continue "$SD_EXT2_PART";
+			/system/bin/tune2fs -O ^has_journal "$SD_EXT2_PART";
+			/system/bin/tune2fs -O ^huge_file "$SD_EXT2_PART";
+			/system/bin/e2fsck -y -v -f "$SD_EXT2_PART";
+			$BUSYBOX mount -t ext4 -o noauto_da_alloc,data=ordered,commit=15,barrier=1,nouser_xattr,errors=continue,noatime,nodiratime,nosuid,nodev "$SD_EXT2_PART" "$SD_EXT2_DIR";
+			$BUSYBOX mkdir /data/data;
+			$BUSYBOX chown 1000.1000 /data/data;
+			$BUSYBOX chmod 771 /data/data;
+			$BUSYBOX cp -a /data/data/* "$SD_EXT2_DIR";
+			$BUSYBOX rm -rf /data/data/*;
+			sync
+			sleep 1
+			$BUSYBOX umount "$SD_EXT2_DIR";
+			sleep 1
+		fi
+		
+		$BUSYBOX touch /data/system/data2sd.ext.finish;
+	fi
+		
+	if [ -b "$SD_EXT2_PART" ];
+	then
+		/system/bin/tune2fs -l "$SD_EXT2_PART";
+		/system/bin/e2fsck -y -v -f "$SD_EXT2_PART";
+		$BUSYBOX mkdir "$SD_EXT2_DIR";
+		$BUSYBOX mount -t ext4 -o noauto_da_alloc,data=ordered,commit=15,barrier=1,nouser_xattr,errors=continue,noatime,nodiratime,nosuid,nodev "$SD_EXT2_PART" "$SD_EXT2_DIR";
+		if [ -d /data/data ] && [ ! -h /data/data ]; then
+			$BUSYBOX cp -a /data/data/* "$SD_EXT2_DIR";
+			$BUSYBOX rm -rf /data/data/*;
+		fi
+		if [ -h /data/data ] || [ ! -d /data/data ];then
+			$BUSYBOX rm -rf /data/data;
+		fi
+		sync
+		sleep 1
+		$BUSYBOX umount "$SD_EXT2_DIR";
+		sleep 1
+		$BUSYBOX mount -t ext4 -o noauto_da_alloc,data=ordered,commit=15,barrier=1,nouser_xattr,errors=continue,noatime,nodiratime,nosuid,nodev "$SD_EXT2_PART" /data/data;
+	fi
+
+	if [ -b "$SD_EXT3_PART" ];
+	then
+		echo "+++ Found mmcblk0p4, will use it for swap, create swap fs on it now..."
+		echo "1" > /proc/sys/vm/swappiness;
+		echo "50" > /proc/sys/vm/vfs_cache_pressure;
+		swapon /dev/block/mmcblk0p4;
+	fi
+	
+	sync
+	
+	setprop cm.a2sd.active 1;
+
+	echo "+++ Data-to-EXT successfully enabled";	
+
+else
+	setprop cm.a2sd.active 0;
+	echo "+++ Data-to-EXT disabled";	
+fi
+
+sync;

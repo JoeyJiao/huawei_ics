@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+**
+** Copyright 2009, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License")
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<device name="Android">
+  <item name="none">0</item>
+  <item name="screen.on">3</item>
+  <item name="bluetooth.active">1.0</item>
+  <item name="bluetooth.on">0.8</item>
+  <item name="bluetooth.at">3.5</item>
+  <item name="screen.full">11.4</item>
+  <item name="wifi.on">2.3</item>
+  <item name="wifi.active">20</item>
+  <item name="wifi.scan">20</item>
+  <item name="dsp.audio">7</item>
+  <item name="dsp.video">10</item>
+  <item name="radio.active">23</item>
+  <item name="gps.on">12</item>
+  <array name="radio.on"> <!-- Strength 0 to BINS-1 -->
+      <value>9</value>
+      <value>0.3</value>
+  </array>
+  <array name="cpu.speeds">
+      <value>19200</value>
+      <value>122880</value>
+      <value>128000</value>
+      <value>245760</value>
+      <value>384000</value>
+      <value>528000</value>
+	  <value>600000</value>
+      <value>691000</value>
+      <value>710000</value>
+      <value>748000</value>
+  </array>
+  <!-- Power consumption when CPU is idle -->
+  <item name="cpu.idle">1.7</item>
+  <!-- Power consumption at different speeds -->
+  <array name="cpu.active">
+      <value>0.1</value>
+      <value>0.2</value>
+      <value>0.3</value>
+      <value>4.5</value>
+      <value>10</value>
+      <value>14</value>
+      <value>18</value>
+      <value>20</value>
+      <value>22</value>
+      <value>25</value>
+  </array>
+  <!-- This is the battery capacity in mAh -->
+  <item name="battery.capacity">1050</item>
+</device>

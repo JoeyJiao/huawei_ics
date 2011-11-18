@@ -1,0 +1,18 @@
+#!/system/bin/sh
+if [ -d /data/local/log-joey/ ]
+then
+	echo "Start record log!"
+else
+   mkdir /data/local/log-joey/
+fi
+if [ -f /data/local/log-joey/log-logcat.txt ]
+then
+	cp /data/local/log-joey/log-logcat.txt /data/local/log-joey/log-logcat-last.txt
+fi
+if [ -f /data/local/log-joey/log-kmsg.txt ]
+then
+	cp /data/local/log-joey/log-kmsg.txt /data/local/log-joey/log-kmsg-last.txt
+fi
+   logcat >/data/local/log-joey/log-logcat.txt &
+   cat /proc/kmsg >/data/local/log-joey/log-kmsg.txt &
+

@@ -1,0 +1,8 @@
+on property:sys.usb.config=cdrom
+    write /sys/devices/platform/msm_hsusb/gadget/switchusb $sys.usb.config
+    setprop sys.usb.state $sys.usb.config
+
+on property:sys.usb.config=udisk
+    write /sys/devices/platform/msm_hsusb/gadget/switchusb $sys.usb.config
+    setprop sys.usb.state $sys.usb.config
+
