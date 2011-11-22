@@ -32,7 +32,8 @@ PRODUCT_PACKAGES := \
     WAPPushManager \
     Provision \
     QuickSearchBox \
-    Stk
+    Stk \
+    Mms
 
 # Additional settings used in all AOSP builds
 PRODUCT_PROPERTY_OVERRIDES := \

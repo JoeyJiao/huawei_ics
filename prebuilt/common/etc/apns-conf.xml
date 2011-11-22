@@ -17,7 +17,7 @@
 */
 -->
 <!-- use empty string to specify no proxy or port -->
-<apns version="6">
+<apns version="7">
   <apn carrier="Cosmote GR" mcc="202" mnc="01" apn="Internet" type="default,supl" />
   <apn carrier="Cosmote GR MMS" mcc="202" mnc="01" apn="Mms" mmsc="195.167.65.220:8002" mmsproxy="10.10.10.20" mmsport="8080" type="mms" />
   <apn carrier="Cosmote Wireless Internet" mcc="202" mnc="01" apn="internet" type="default,supl" />
@@ -1065,8 +1065,8 @@
   <apn carrier="China Unicom MMS" mcc="460" mnc="01" apn="uniwap" mmsc="http://mmsc.myuni.com.cn" mmsproxy="10.0.0.172" mmsport="80" type="mms" />
   <apn carrier="China Mobile" mcc="460" mnc="02" apn="cmnet" type="default,supl" />
   <apn carrier="China Mobile MMS" mcc="460" mnc="02" apn="cmwap" proxy="10.0.0.172" port="80" mmsc="http://mmsc.monternet.com" mmsproxy="10.0.0.172" mmsport="80" type="mms" />
-  <apn carrier="中国电信互联网设置CTNET" mcc="460" mnc="003" apn="#777" user="ctnet@mycdma.cn" password="vnet.mobi" proxy="" port="" mmsproxy="" mmsport="" mmsc="" authtype="3" type="default" />
-  <apn carrier="中国电信WAP设置CTWAP" mcc="460" mnc="003" apn="#777" user="ctnet@mycdma.cn" password="vnet.mobi" proxy="10.0.0.200" port="80" mmsproxy="10.0.0.200" mmsport="80" mmsc="http://mmsc.vnet.mobi" authtype="3" type="*" />
+  <apn carrier="中国电信互联网设置CTNET" mcc="460" mnc="03" apn="#777" user="ctnet@mycdma.cn" password="vnet.mobi" proxy="" port="" mmsproxy="" mmsport="" mmsc="" authtype="3" type="default" />
+  <apn carrier="中国电信WAP设置CTWAP" mcc="460" mnc="03" apn="#777" user="ctnet@mycdma.cn" password="vnet.mobi" proxy="10.0.0.200" port="80" mmsproxy="10.0.0.200" mmsport="80" mmsc="http://mmsc.vnet.mobi" authtype="3" type="*" />
   <apn carrier="中国移动 (China Mobile) GPRS" mcc="460" mnc="07" apn="cmnet" type="default,supl" />
   <apn carrier="中国移动彩信 (China Mobile)" mcc="460" mnc="07" apn="cmwap" proxy="10.0.0.172" port="80" mmsc="http://mmsc.monternet.com" mmsproxy="10.0.0.172" mmsport="80" type="mms" />
   <apn carrier="遠傳電信(Far EasTone) (Fetnet01)" mcc="466" mnc="01" apn="fetnet01" proxy="210.241.199.199" port="80" type="default,supl" />

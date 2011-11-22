@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-add_lunch_combo full_c8500-user
+add_lunch_combo full_c8500-eng

@@ -21,7 +21,7 @@ BOARD_USE_FROYO_LIBCAMERA := true
 BUILD_OLD_LIBCAMERA := true
 
 # Use the non-open-source parts, if they're present
--include vendor/huawei/c8500/BoardConfigVendor.mk
+-include device/huawei/c8500/BoardConfigVendor.mk
 
 TARGET_BOARD_PLATFORM := msm7625
 TARGET_CPU_ABI := armeabi-v6j
@@ -34,8 +34,8 @@ TARGET_NO_RADIOIMAGE := true
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := false
 
-TARGET_PREBUILT_RECOVERY_KERNEL := vendor/huawei/c8500/prebuilt/kernel
-TARGET_PREBUILT_KERNEL := vendor/huawei/c8500/prebuilt/kernel
+TARGET_PREBUILT_RECOVERY_KERNEL := device/huawei/c8500/prebuilt/kernel
+TARGET_PREBUILT_KERNEL := device/huawei/c8500/prebuilt/kernel
 
 # Recovery
 BOARD_LDPI_RECOVERY := true
@@ -67,7 +67,7 @@ BOARD_KERNEL_CMDLINE := mem=211M console=ttyMSM2,115200n8 androidboot.hardware=q
 BOARD_KERNEL_PAGESIZE := 4096
 
 # USB
-#BOARD_CUSTOM_USB_CONTROLLER := ../../vendor/huawei/c8500/UsbController.cpp
+#BOARD_CUSTOM_USB_CONTROLLER := ../../device/huawei/c8500/UsbController.cpp
 #BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 #for VolumeManager.cpp
 TARGET_USE_CUSTOM_LUN_FILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
@@ -98,7 +98,7 @@ TARGET_ELECTRONBEAM_FRAMES := 10
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-#WIFI_DRIVER_FW_PATH_P2P     := "/vendor/firmware/fw_bcmdhd_p2p.bin"
+#WIFI_DRIVER_FW_PATH_P2P     := "/device/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP := "/system/etc/firmware/fw_bcm4319_apsta.bin"
 WIFI_DRIVER_FW_PATH_STA := "/system/etc/firmware/fw_bcm4319.bin"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/firmware/fw_bcm4319.bin nvram_path=/system/etc/firmware/nvram.txt"

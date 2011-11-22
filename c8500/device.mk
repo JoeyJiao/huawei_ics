@@ -33,29 +33,26 @@ $(call inherit-product, device/common/gps/gps_as_supl.mk)
 #PRODUCT_PACKAGE_OVERLAYS += device/huawei/overlay/ldpi
 #PRODUCT_PACKAGE_OVERLAYS += device/huawei/c8500/overlay
 DEVICE_PACKAGE_OVERLAYS += device/huawei/c8500/overlay
-#PRODUCT_LOCALES += ldpi mdpi
+PRODUCT_LOCALES += ldpi mdpi
 
 PRODUCT_AAPT_CONFIG := ldpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
-PRODUCT_PACKAGES := \
-	lights.default
-# \
-#	charger \
-#	charger_res_images
-
 PRODUCT_PACKAGES += \
 	rzscontrol
 
-#PRODUCT_PACKAGES += \
-#	copybit.default \
-#    	gralloc.msm7k \
+#	charger \
+#	charger_res_images
+PRODUCT_PACKAGES += \
+	lights.default \
+	copybit.default \
+    	gralloc.msm7k
+# \
 #    	liboverlay \
 #    	overlay.default \
 #    	libaudio \
 #    	gps.C8500 \
 #    	libRS \
-#    	rzscontrol \
 #    	libOmxCore \
 #    	libmm-omxcore \
 #    	Gallery
@@ -84,6 +81,10 @@ PRODUCT_COPY_FILES += \
 # Board-specific init
 PRODUCT_COPY_FILES += \
     device/huawei/c8500/prebuilt/initlogo.rle:root/initlogo.rle
+
+# configuration
+PRODUCT_COPY_FILES += \
+    device/huawei/c8500/prebuilt/system/usr/idc/cypress-ts-innolux_Ver04.idc:system/usr/idc/cypress-ts-innolux_Ver04.idc
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -226,7 +227,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.enable_bypass=1 \
     ro.telephony.default_network=4 \
     ro.sf.lcd_density=120 \
-    ro.com.android.dataroaming=false
+    ro.com.android.dataroaming=false \
+    telephony.lteOnCdmaDevice=1
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
