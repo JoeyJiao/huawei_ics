@@ -87,9 +87,9 @@ PRODUCT_COPY_FILES += \
     device/huawei/c8500/prebuilt/system/usr/idc/cypress-ts-innolux_Ver04.idc:system/usr/idc/cypress-ts-innolux_Ver04.idc
 
 # Keylayouts
-PRODUCT_COPY_FILES += \
-    device/huawei/c8500/prebuilt/system/usr/keychars/surf_keypad.kcm.bin:system/usr/keychars/surf_keypad.kcm.bin \
-    device/huawei/c8500/prebuilt/system/usr/keylayout/surf_keypad.kl:system/usr/keylayout/surf_keypad.kl
+#PRODUCT_COPY_FILES += \
+#    device/huawei/c8500/prebuilt/system/usr/keychars/surf_keypad.kcm.bin:system/usr/keychars/surf_keypad.kcm \
+#    device/huawei/c8500/prebuilt/system/usr/keylayout/surf_keypad.kl:system/usr/keylayout/surf_keypad.kl
 
 # Dummy backing file for USB mounting
 PRODUCT_COPY_FILES += \
