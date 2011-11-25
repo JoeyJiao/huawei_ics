@@ -1,0 +1,30 @@
+#
+# system.prop for Huawei Common
+#
+
+rild.libpath=/system/lib/libril-qc-1.so
+rild.libargs=-d /dev/smd0
+persist.rild.nitz_plmn=
+DEVICE_PROVISIONED=1
+#ro.config.hwft_PNN_function=true
+#persist.cust.tel.adapt=1
+#persist.cust.tel.eons=1
+mobiledata.interfaces=rmnet0,rmnet1,rmnet2
+
+ro.com.google.locationfeatures=0
+
+# Allow or deny tethering.
+ro.tether.denied=false
+
+# Disable fs check on boot by default.
+sys.checkfs.fat=false
+
+# Increase SKIA decode memory capability for progressive jpg file.
+ro.media.dec.jpeg.memcap=20000000
+
+# This will go away someday.
+# Debugging oem_rpc_svc.
+ro.confg.hw_appsbootversion=C8600V100R001C92B225SP13_APPSBOOT
+ro.confg.hw_appversion=C8600V100R001C92B225SP13_KERNEL
+ro.confg.hw_appfsversion=C8600V100R001C92B225SP13_SYSIMG
+
