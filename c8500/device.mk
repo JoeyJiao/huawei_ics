@@ -46,11 +46,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	lights.default \
 	copybit.default \
-    	gralloc.msm7k
-# \
+    	gralloc.msm7625 \
+	audio.primary.msm7625 \
+	audio_policy.msm7625
 #    	liboverlay \
 #    	overlay.default \
-#    	libaudio \
 #    	gps.C8500 \
 #    	libRS \
 #    	libOmxCore \
