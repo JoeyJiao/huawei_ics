@@ -84,7 +84,16 @@ PRODUCT_COPY_FILES += \
 
 # configuration
 PRODUCT_COPY_FILES += \
+    device/huawei/c8500/prebuilt/system/usr/idc/7k_handset.idc:system/usr/idc/7k_handset.idc
     device/huawei/c8500/prebuilt/system/usr/idc/cypress-ts-innolux_Ver04.idc:system/usr/idc/cypress-ts-innolux_Ver04.idc
+    device/huawei/c8500/prebuilt/system/usr/idc/kp_test_input.idc:system/usr/idc/kp_test_input.idc
+    device/huawei/c8500/prebuilt/system/usr/idc/melfas-touchscreen.idc:system/usr/idc/melfas-touchscreen.idc
+    device/huawei/c8500/prebuilt/system/usr/idc/msm_touchscreen.idc:system/usr/idc/msm_touchscreen.idc
+    device/huawei/c8500/prebuilt/system/usr/idc/surf_keypad.idc:system/usr/idc/surf_keypad.idc
+    device/huawei/c8500/prebuilt/system/usr/idc/synaptics.idc:system/usr/idc/synaptics.idc
+    device/huawei/c8500/prebuilt/system/usr/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
+    device/huawei/c8500/prebuilt/system/usr/idc/touchscreen-keypad.idc:system/usr/idc/touchscreen-keypad.idc
+    device/huawei/c8500/prebuilt/system/usr/idc/ts_test_input.idc:system/usr/idc/ts_test_input.idc
 
 # Keylayouts
 #PRODUCT_COPY_FILES += \
