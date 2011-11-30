@@ -11,7 +11,7 @@ DEVICE_PROVISIONED=1
 #persist.cust.tel.eons=1
 mobiledata.interfaces=rmnet0,rmnet1,rmnet2
 
-ro.com.google.locationfeatures=0
+ro.com.google.locationfeatures=1
 
 # Allow or deny tethering.
 ro.tether.denied=false

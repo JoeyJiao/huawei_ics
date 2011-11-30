@@ -96,9 +96,8 @@ PRODUCT_COPY_FILES += \
     device/huawei/c8500/prebuilt/system/usr/idc/ts_test_input.idc:system/usr/idc/ts_test_input.idc
 
 # Keylayouts
-#PRODUCT_COPY_FILES += \
-#    device/huawei/c8500/prebuilt/system/usr/keychars/surf_keypad.kcm.bin:system/usr/keychars/surf_keypad.kcm \
-#    device/huawei/c8500/prebuilt/system/usr/keylayout/surf_keypad.kl:system/usr/keylayout/surf_keypad.kl
+PRODUCT_COPY_FILES += \
+    frameworks/base/data/keyboards/Virtual.kcm:system/usr/keychars/Virtual.kcm
 
 # Dummy backing file for USB mounting
 PRODUCT_COPY_FILES += \
