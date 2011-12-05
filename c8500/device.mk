@@ -45,10 +45,10 @@ PRODUCT_PACKAGES += \
 #	charger_res_images
 PRODUCT_PACKAGES += \
 	lights.default \
-	copybit.default \
     	gralloc.msm7625 \
 	audio.primary.msm7625 \
-	audio_policy.msm7625
+	audio_policy.msm7625 \
+	Gallery
 #    	liboverlay \
 #    	overlay.default \
 #    	gps.C8500 \
@@ -225,9 +225,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cdma.home.operator.numeric=46003 \
-    gsm.sim.operator.numeric=46003 \
-    gsm.operator.numeric=46003 \
     ro.cdma.home.operator.alpha=中国电信 \
     ro.config.cdma_subscription=0 \
     ril.subscription.types=RUIM,NV \

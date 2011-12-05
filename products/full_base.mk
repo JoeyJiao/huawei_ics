@@ -29,7 +29,8 @@ PRODUCT_PACKAGES := \
     Provision \
     QuickSearchBox \
     Stk \
-    Mms
+    Mms \
+    Gallery
 
 # Additional settings used in all AOSP builds
 PRODUCT_PROPERTY_OVERRIDES := \
