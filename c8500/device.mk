@@ -141,10 +141,11 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/base/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
-#    device/huawei/proprietary/rild:system/bin/rild \
-#    device/huawei/proprietary/libril.so:system/lib/libril.so \
 # Proprietary RIL related
 PRODUCT_COPY_FILES += \
+    device/huawei/proprietary/common/rild:system/bin/rild \
+    device/huawei/proprietary/common/libril.so:obj/lib/libril.so \
+    device/huawei/proprietary/common/libril.so:system/lib/libril.so \
     device/huawei/proprietary/common/libauth.so:system/lib/libauth.so \
     device/huawei/proprietary/common/libril-qc-1.so:system/lib/libril-qc-1.so \
     device/huawei/proprietary/common/liboncrpc.so:system/lib/liboncrpc.so \
